@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Georgia", ui-serif, serif;
+  --font-sans: "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-blush: #FDF8F7;
+  --color-warm-blush: #FADADD;
+  --color-peach: #FFEBDE;
+  --color-lavender: #E6ADAD;
+  --color-sage: #E2E8DD;
+  --color-sage-dark: #7D8C7A;
+  --color-gold: #D4AF37;
+  --color-gold-light: #C5A059;
+  --color-ink: #4A4A4A;
+  --color-ink-light: #666666;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  cursor: none; /* Hide default cursor to use custom floating floral cursor */
+  background-color: var(--color-blush);
+  color: var(--color-ink);
+  overflow-x: hidden;
+  font-family: var(--font-serif);
+}
+
+body {
+  border: 12px solid var(--color-blush);
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid var(--color-gold);
+  margin: 10px;
+  pointer-events: none;
+  z-index: 150;
+  opacity: 0.5;
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-blush); 
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage); 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold); 
+}
+
+/* Utilities for glassmorphism and editorial theme */
+.glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 87, 0.3);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(to right, #D4AF37, #C5A059, #D4AF37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
