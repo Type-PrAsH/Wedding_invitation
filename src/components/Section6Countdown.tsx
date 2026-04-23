@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Section6Countdown() {
   const [timeLeft, setTimeLeft] = useState({
     days: 0, hours: 0, minutes: 0, seconds: 0
   });
+  const { t } = useLanguage();
 
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -13,8 +15,8 @@ export default function Section6Countdown() {
   });
 
   useEffect(() => {
-    // Target date: Dec 12, 2026
-    const targetDate = new Date('2026-12-12T00:00:00').getTime();
+    // Target date: May 12, 2026
+    const targetDate = new Date('2026-05-12T00:00:00').getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -36,10 +38,10 @@ export default function Section6Countdown() {
   }, []);
 
   const timeBlocks = [
-    { label: 'Days', value: timeLeft.days },
-    { label: 'Hours', value: timeLeft.hours },
-    { label: 'Minutes', value: timeLeft.minutes },
-    { label: 'Seconds', value: timeLeft.seconds }
+    { label: t('days'), value: timeLeft.days },
+    { label: t('hours'), value: timeLeft.hours },
+    { label: t('minutes'), value: timeLeft.minutes },
+    { label: t('seconds'), value: timeLeft.seconds }
   ];
 
   return (
@@ -60,8 +62,8 @@ export default function Section6Countdown() {
         transition={{ duration: 1 }}
         whileHover={{ boxShadow: '0 0 60px rgba(255,255,255,0.2)' }}
       >
-        <h2 className="font-serif text-3xl md:text-5xl text-white italic mb-12 drop-shadow-md">
-          Counting the Days
+        <h2 className="font-serif text-3xl md:text-5xl text-white italic mb-12 drop-shadow-md whitespace-pre-line leading-relaxed">
+          {t('countdownTitle')}
         </h2>
 
         <div className="flex flex-wrap justify-center gap-6 md:gap-12">

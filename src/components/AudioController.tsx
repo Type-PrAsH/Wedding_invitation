@@ -23,7 +23,7 @@ export default function AudioController() {
       <audio 
         ref={audioRef} 
         loop 
-        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+        src="/music/background.mp3" 
       />
       <motion.button
         onClick={togglePlay}

@@ -1,15 +1,17 @@
 import { motion } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
 import { clsx } from 'clsx';
+import { useLanguage } from '../context/LanguageContext';
 
 interface StoryBlockProps {
   text: string;
   subtext: string;
   image: string;
   reverse?: boolean;
+  imagePosition?: string;
 }
 
-function StoryBlock({ text, subtext, image, reverse = false }: StoryBlockProps) {
+function StoryBlock({ text, subtext, image, reverse = false, imagePosition = "object-center" }: StoryBlockProps) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -30,15 +32,15 @@ function StoryBlock({ text, subtext, image, reverse = false }: StoryBlockProps) 
         transition={{ duration: 1, ease: 'easeOut' }}
       >
         <div className="bg-white p-8 md:p-10 rounded-[20px] shadow-[0_10px_30px_rgba(230,173,173,0.15)] border border-warm-blush max-w-md w-full relative z-10">
-          <h3 className="font-serif text-2xl md:text-3xl text-gold-light italic mb-4 font-normal">
+          <h3 className="font-serif text-2xl md:text-3xl text-gold-light italic mb-4 font-normal whitespace-pre-line">
             {text}
           </h3>
-          <p className="font-sans text-sm outline-none leading-relaxed text-ink-light">
+          <p className="font-sans text-sm outline-none leading-relaxed text-ink-light whitespace-pre-line">
             {subtext}
           </p>
         </div>
       </motion.div>
-      
+
       <motion.div
         className="w-full md:w-1/2"
         initial={{ opacity: 0, x: reverse ? -50 : 50 }}
@@ -54,7 +56,7 @@ function StoryBlock({ text, subtext, image, reverse = false }: StoryBlockProps) 
             <img
               src={image}
               alt="Story moment"
-              className="w-full h-full object-cover"
+              className={clsx("w-full h-full object-cover", imagePosition)}
               loading="lazy"
             />
           </motion.div>
@@ -66,21 +68,30 @@ function StoryBlock({ text, subtext, image, reverse = false }: StoryBlockProps) 
 }
 
 export default function Section2Story() {
+  const { t } = useLanguage();
+
   return (
     <section className="w-full py-24 bg-blush relative overflow-hidden">
       {/* Decorative background elements can go here */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-warm-blush rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-peach rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-y-1/3 -translate-x-1/4" />
 
+      <div className="max-w-4xl mx-auto px-6 text-center mt-8 mb-24 relative z-10">
+        <h2 className="font-serif text-2xl md:text-4xl text-gold-light font-normal mb-8 whitespace-pre-line leading-relaxed">
+          {t('mantra')}
+        </h2>
+      </div>
+
       <StoryBlock
-        text="It all started with a smile..."
-        subtext="From a chance encounter to endless conversations, every moment felt like a piece of a puzzle falling into place. We knew there was something special from day one."
-        image="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&q=80&w=2070"
+        text={t('story1Title')}
+        subtext={t('story1Text')}
+        image="/images/story1.jpg"
       />
       <StoryBlock
-        text="From strangers to soulmates..."
-        subtext="Through every season, our bond only grew stronger. Now, we are ready to step into our forever, hand in hand, hearts full of love."
-        image="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=2069"
+        text={t('story2Title')}
+        subtext={t('story2Text')}
+        image="/images/story2.jpg"
+        imagePosition="object-bottom"
         reverse
       />
     </section>

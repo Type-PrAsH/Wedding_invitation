@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
 import { X } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const images = [
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=1974",
-  "https://images.unsplash.com/photo-1543885994-013626e95262?auto=format&fit=crop&q=80&w=2070",
-  "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=2070",
-  "https://images.unsplash.com/photo-1542042161784-26ab9e041e89?auto=format&fit=crop&q=80&w=2070",
-  "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&q=80&w=2070",
-  "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&q=80&w=2070"
+  "/images/gallery1.jpg",
+  "/images/gallery2.jpg",
+  "/images/gallery3.jpg",
+  "/images/gallery4.jpg",
+  "/images/gallery5.jpg",
+  "/images/gallery6.jpg"
 ];
 
 function GalleryItem({ src, index, onClick }: { src: string; index: number; onClick: (src: string) => void }) {
@@ -44,13 +45,14 @@ function GalleryItem({ src, index, onClick }: { src: string; index: number; onCl
 
 export default function Section4Gallery() {
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   return (
     <section className="w-full py-24 bg-blush relative">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-3xl md:text-5xl text-gold-light italic mb-2 font-normal">Gallery</h2>
-          <p className="font-sans text-ink-light tracking-[2px] text-[11px] uppercase">Cherished Moments</p>
+          <h2 className="font-serif text-3xl md:text-5xl text-gold-light italic mb-2 font-normal">{t('galleryTitle')}</h2>
+          <p className="font-sans text-ink-light tracking-[2px] text-[11px] uppercase">{t('gallerySub')}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
@@ -70,7 +72,7 @@ export default function Section4Gallery() {
             className="fixed inset-0 z-[200] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-pointer"
             onClick={() => setSelectedImg(null)}
           >
-            <button 
+            <button
               className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
               onClick={() => setSelectedImg(null)}
             >
